@@ -6,5 +6,7 @@ Spring:
     
   jpa:
     hibernate:
-      ddl-auto: create
+      #the "create" option will wipe out pre-existing data and recreate the tables
+      #the "update" will keep existing data and update the tables with new information
+      ddl-auto: update
     show-sql: true
