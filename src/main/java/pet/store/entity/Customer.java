@@ -3,6 +3,8 @@ package pet.store.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,5 +30,10 @@ public class Customer {
 	@ToString.Exclude
 	@ManyToMany(mappedBy = "customers", cascade = CascadeType.PERSIST)
 	private Set<PetStore> petStores = new HashSet<PetStore>();
+	
+	@JsonBackReference
+	public Set<PetStore> getPetStores() {
+		return petStores;
+	}
 
 }

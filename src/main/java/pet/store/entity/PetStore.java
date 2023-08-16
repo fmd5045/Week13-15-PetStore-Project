@@ -3,6 +3,9 @@ package pet.store.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,19 +29,28 @@ public class PetStore {
 	private String petStoreAddress;
 	private String petStoreCity;
 	private String petStoreState;
-	private String petStoreZip;
+	private Long petStoreZip;
 	private String petStorePhone;
 	
 	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "pet_store_customer", joinColumns = @JoinColumn(name = "pet_store_id"), inverseJoinColumns = @JoinColumn(name = "customer_id"))
 	private Set<Customer> customers = new HashSet<Customer>();
 	
 	
 	@EqualsAndHashCode.Exclude
-	@ToString.Exclude
 	//pet_store or petStore
 	@OneToMany(mappedBy = "petStore", cascade = CascadeType.ALL, orphanRemoval = true)
 	private Set<Employee> employees = new HashSet<Employee>();
+	
+	@JsonManagedReference
+	public Set<Employee> getEmployees() {
+		return this.employees;
+	}
+
+	@JsonManagedReference
+	public Set<Customer> getCustomers() {
+		return customers;
+	}
+	
 	}

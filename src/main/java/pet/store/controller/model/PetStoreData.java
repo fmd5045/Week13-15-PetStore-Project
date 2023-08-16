@@ -1,9 +1,7 @@
-package pet.store.controller;
+package pet.store.controller.model;
 
 import java.util.HashSet;
 import java.util.Set;
-
-import org.springframework.cglib.core.LocalVariablesSorter;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,7 +18,7 @@ public class PetStoreData {
 	private String petStoreAddress;
 	private String petStoreCity;
 	private String petStoreState;
-	private String petStoreZip;
+	private Long petStoreZip;
 	private String petStorePhone;
 	private Set<PetStoreCustomer> customers = new HashSet<PetStoreCustomer>();
 	private Set<PetStoreEmployee> employees = new HashSet<PetStoreEmployee>();
@@ -54,7 +52,7 @@ public class PetStoreData {
 		private String customerLastName;
 		private String customerEmail;
 
-		private PetStoreCustomer(Customer customer) {
+		public PetStoreCustomer(Customer customer) {
 			customerId = customer.getCustomerId();
 			customerFirstName = customer.getCustomerFirstName();
 			customerLastName = customer.getCustomerLastName();
@@ -66,18 +64,18 @@ public class PetStoreData {
 	@NoArgsConstructor
 	//Associating the petstoreemployees with petstore
 	public static class PetStoreEmployee {
-		private Long petStoreEmployeeId;
-		private String petStoreEmployeeFirstName;
-		private String petStoreEmployeeLastName;
-		private String petStoreEmployeePhone;
-		private String petStoreEmployeeJobTitle;
+		private Long employeeId;
+		private String employeeFirstName;
+		private String employeeLastName;
+		private String employeePhone;
+		private String employeeJobTitle;
 
-		private PetStoreEmployee(Employee employee) {
-			petStoreEmployeeId = employee.getEmployeeId();
-			petStoreEmployeeFirstName = employee.getEmployeeFirstName();
-			petStoreEmployeeLastName = employee.getEmployeeLastName();
-			petStoreEmployeePhone = employee.getEmployeePhone();
-			petStoreEmployeeJobTitle = employee.getEmployeeJobTitle();
+		public PetStoreEmployee(Employee employee) {
+			employeeId = employee.getEmployeeId();
+			employeeFirstName = employee.getEmployeeFirstName();
+			employeeLastName = employee.getEmployeeLastName();
+			employeePhone = employee.getEmployeePhone();
+			employeeJobTitle = employee.getEmployeeJobTitle();
 		}
 	}
 }

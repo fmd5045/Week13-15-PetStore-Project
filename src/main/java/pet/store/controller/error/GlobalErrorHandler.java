@@ -17,7 +17,7 @@ public class GlobalErrorHandler {
 
 	@ExceptionHandler(NoSuchElementException.class)
 	@ResponseStatus(code = HttpStatus.NOT_FOUND)
-	private Map<String, String> handleNoSuchErrorException(NoSuchElementException exception) {
+	public Map<String, String> handleNoSuchErrorException(NoSuchElementException exception) {
 		log.info("NoSuchElementException occured: {}", exception.getMessage());
 
 		Map<String, String> errorResponse = new HashMap<String, String>();
@@ -25,11 +25,24 @@ public class GlobalErrorHandler {
 
 		return errorResponse;
 	}
-}
 
-//	private ExceptioMessage buildExceptionMessage(Exception exception, HttpStatus status, WebRequest webRequest,
-//			LogStatus logStatus) {
-//	
-//		String messageString = exception.toString();
-//		String statusReason = 
-//		}
+	@ExceptionHandler(UnsupportedOperationException.class)
+	@ResponseStatus(code = HttpStatus.METHOD_NOT_ALLOWED)
+	public Map<String, String> hadleUnsupportedOPerationException(UnsupportedOperationException exception) {
+		log.info("UnsupportedOperationException occured: {}", exception.getMessage());
+		Map<String, String> errorResponse = new HashMap<String, String>();
+		errorResponse.put("message", exception.toString());
+		
+		return errorResponse;
+	}
+
+	@ExceptionHandler(Exception.class)
+	@ResponseStatus(code = HttpStatus.INTERNAL_SERVER_ERROR)
+	public Map<String, String> handleException(Exception exception) {
+		log.info("Exception occured: {}", exception.getMessage());
+		Map<String, String> errorResponse = new HashMap<String, String>();
+		errorResponse.put("message", exception.toString());
+		return errorResponse;
+	}
+	
+}

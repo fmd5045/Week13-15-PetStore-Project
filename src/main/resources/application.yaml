@@ -10,3 +10,8 @@ Spring:
       #the "update" will keep existing data and update the tables with new information
       ddl-auto: update
     show-sql: true
+    defer-datasource-initialization: true
+    
+  sql:
+    init:
+      mode: never
